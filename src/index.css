@@ -1,13 +1,273 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  outline: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Custom Properties, update these for your own design */
+
+:root {
+  --ff-primary: "Poppins", sans-serif;
+
+  --fw-reg: 300;
+  --fw-bold: 600;
+  --fw-normal-light: 400;
+  --fw-normal: 500;
+
+  --clr-primary: #e3dbdbb3;
+  --clr-secondary: #16214e;
+  --clr-tertiary: #a9a5ee;
+  --clr-gray-light: #e3dbdb;
+
+  --bs: 0.25em 0.25em 0.75em rgba(0, 0, 0, 0.25),
+    0.125em 0.125em 0.25em rgba(0, 0, 0, 0.15);
+}
+
+/* General styles */
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  background: #fff;
+  color: var(--clr-dark);
+  margin: 0;
+  font-family: var(--ff-primary);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+}
+
+main {
+  width: 100%;
+  margin: 0 auto;
+  max-width: 100%;
+  position: relative;
+}
+
+section {
+  padding: 3em 1em;
+  background: #fff;
+  width: auto;
+}
+
+strong {
+  font-weight: var(--fw-bold);
+}
+
+:focus {
+  outline: 3px solid var(--clr-accent);
+  outline-offset: 3px;
+}
+
+input,
+select,
+button {
+  height: 4.4em;
+}
+
+/* Buttons */
+a,
+button {
+  outline: none !important;
+  text-decoration: none;
+}
+
+.btn--outline {
+  display: flex;
+  background-color: #fff;
+  border-radius: 8px;
+  color: var(--clr-gray-light);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.7rem;
+  padding: 1rem 1.5rem;
+  width: 100%;
+  position: relative;
+  border: 1px solid var(--clr-gray-light);
+  margin: 8px 0;
+  justify-content: center;
+}
+
+.selected {
+  border: 1px solid var(--clr-tertiary);
+  color: var(--clr-tertiary);
+}
+.btn {
+  display: flex;
+  background-color: #2ddb97;
+  border-radius: 11px;
+  color: #fff;
+  font-size: var(--fs-h3);
+  line-height: 1.7rem;
+  padding: 1rem 1.5rem;
+  transition: all 0.3s ease;
+  width: 93%;
+  position: relative;
+  border: 1px solid #2ddb97;
+  display: block;
+  margin: 1em auto;
+  box-shadow: 1px 1px 4px 0px rgb(0 0 0 / 17%);
+}
+
+.btn:hover {
+  transform: scale(1);
+  background-color: var(--clr-gray-light);
+  border: 1px solid var(--clr-gray-light);
+  color: #000;
+}
+
+.btn--accept,
+.btn--apply {
+  background-color: var(--clr-secondary);
+}
+
+.btn--apply {
+  margin: 2em auto;
+}
+/* Dropdown*/
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  color: #000;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  cursor: pointer;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content P {
+  padding-left: 17px;
+}
+/* Typography */
+
+h1,
+h2,
+h3 {
+  line-height: 1.1;
+  margin: 0;
+}
+
+/* form styles*/
+
+.form_wrapper {
+  width: 38em;
+  display: block;
+  margin: 0 auto;
+  border: 1px solid #e3dbdb;
+  border-radius: 11px;
+  padding: 6em 4em;
+}
+
+form {
+  width: 98%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  top: 2.7em;
+  position: relative;
+}
+
+.form_wrapper h4 {
+  font-weight: 800;
+  font-size: 1.3em;
+  color: var(--clr-secondary);
+  width: 93%;
+  margin: 0 auto;
+}
+label {
+  color: #626262;
+  font-size: 0.9em;
+}
+
+fieldset {
+  border: none;
+}
+input,
+select {
+  display: flex;
+  background-color: #fff;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 200;
+  line-height: 1.7rem;
+  padding: 1rem 1.5rem;
+  width: 100%;
+  position: relative;
+  border: 1px solid var(--clr-gray-light);
+  margin: 5px 0;
+  justify-content: center;
+}
+
+::placeholder {
+  color: var(--clr-gray-light);
+}
+
+select {
+  color: var(--clr-gray-light);
+  background: url(http://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_down.png)
+    no-repeat right;
+  -webkit-appearance: none;
+  background-position-x: 92%;
+}
+
+@media only screen and (max-width: 640px) {
+  .form_wrapper {
+    width: 26em;
+    padding: 4em 1em;
+  }
+}
+
+.infos--wrapper {
+  width: 95%;
+  display: block;
+  margin: 0 auto;
+}
+.infos--panel {
+  display: flex;
+  flex-direction: column;
+  line-height: 4em;
+  background: #edebfc;
+  border-radius: 12px;
+  padding: 29px 40px;
+  width: 100%;
+  margin: 1em auto;
+}
+
+.infos--panel span {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid white;
+}
+
+.user--avatar {
+  background: aquamarine;
+  padding: 0.8em;
+  font-size: 5em;
+  font-weight: 200;
+  border-radius: 16em;
+  width: 3em;
+  height: 3em;
+  display: block;
+  margin: 40px auto;
+}
+
+.user--name {
+  text-align: center;
 }
