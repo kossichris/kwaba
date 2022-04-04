@@ -8,7 +8,7 @@ import Signup from "./pages/signup";
 function App() {
   return (
     <main>
-      <Home />
+      <Signup />
     </main>
   );
 }

@@ -6,3 +6,10 @@ export function getUsers(users) {
     payload: users,
   };
 }
+
+export function addUser(data) {
+  return {
+    type: type.ADD_USER_REQUESTED,
+    payload: data,
+  };
+}

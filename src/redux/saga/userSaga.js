@@ -15,6 +15,19 @@ function getApi() {
     });
 }
 
+function signupUser(data) {
+  console.log(data);
+  fetch(apiUrl, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  })
+    .then((response) => response.json())
+    .then((json) => console.log(json));
+}
+
 function* fetchUsers(action) {
   try {
     const users = yield call(getApi);
@@ -24,8 +37,17 @@ function* fetchUsers(action) {
   }
 }
 
+function* addUser(action) {
+  try {
+    const user = yield call(signupUser, action.payload);
+    yield put({ type: "ADD_USER_SUCCESS", user: user.data });
+  } catch (e) {
+    yield put({ type: "ADD_USER_FAILED", message: e.message });
+  }
+}
+
 function* userSaga() {
-  yield takeEvery("GET_USERS_REQUESTED", fetchUsers);
+  yield takeEvery("ADD_USER_REQUESTED", addUser);
 }
 
 export default userSaga;

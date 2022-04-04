@@ -1,6 +1,7 @@
 import * as type from "../types";
 
 const initialState = {
+  data: {},
   users: [],
   loading: false,
   error: null,
@@ -20,6 +21,23 @@ export default function users(state = initialState, action) {
         users: action.users,
       };
     case type.GET_USERS_FAILED:
+      return {
+        ...state,
+        loading: false,
+        error: action.message,
+      };
+    case type.ADD_USER_REQUESTED:
+      return {
+        ...state,
+        loading: true,
+      };
+    case type.ADD_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        data: action.data,
+      };
+    case type.ADD_USER_FAILED:
       return {
         ...state,
         loading: false,
