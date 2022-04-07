@@ -1,6 +1,8 @@
 import * as type from "../types";
 
 const initialState = {
+  updateRent: {},
+  rent: {},
   data: {},
   users: [],
   loading: false,
@@ -35,7 +37,7 @@ export default function users(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        data: action.data,
+        data: action.user,
       };
     case type.ADD_USER_FAILED:
       return {
@@ -43,6 +45,43 @@ export default function users(state = initialState, action) {
         loading: false,
         error: action.message,
       };
+
+    case type.ADD_RENT_REQUESTED:
+      return {
+        ...state,
+        loading: true,
+      };
+    case type.ADD_RENT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        rent: action.rent,
+      };
+    case type.ADD_RENT_FAILED:
+      return {
+        ...state,
+        loading: false,
+        error: action.message,
+      };
+
+    case type.UPDATE_RENT_REQUESTED:
+      return {
+        ...state,
+        loading: true,
+      };
+    case type.UPDATE_RENT_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        updateRent: action.rent,
+      };
+    case type.UPDATE_RENT_FAILED:
+      return {
+        ...state,
+        loading: false,
+        error: action.message,
+      };
+
     default:
       return state;
   }

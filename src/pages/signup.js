@@ -1,6 +1,9 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import Loader from "../components/Loader";
 import { addUser } from "../redux/actions/users";
 
@@ -9,6 +12,11 @@ export default function Signup() {
   const user = useSelector((state) => state.data);
   const loading = useSelector((state) => state.loading);
   const error = useSelector((state) => state.error);
+  let navigate = useNavigate();
+
+  const [User, setUser] = useState();
+  const [showPassNotMatch, setshowPassNotMatch] = useState(false);
+  const [showUserExist, setUserExist] = useState(false);
 
   const {
     register,
@@ -16,8 +24,22 @@ export default function Signup() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    dispatch(addUser(data));
+  const onSubmit = async (data) => {
+    if (data.password === data.confirm) {
+      delete data.confirm;
+      const u = await dispatch(addUser(data));
+      setTimeout(() => {
+        setUser(user);
+        if (error) {
+          setUserExist(true);
+        }
+        if (User) {
+          navigate("/home", { replace: true });
+        }
+      }, 300);
+    } else {
+      setshowPassNotMatch(true);
+    }
   };
 
   return (
@@ -31,7 +53,7 @@ export default function Signup() {
               className="form-control"
               type="text"
               placeholder="Full name"
-              {...register("fullname", {
+              {...register("name", {
                 required: "Please enter your full name",
               })}
             />
@@ -77,6 +99,14 @@ export default function Signup() {
             {loading && <Loader />}
             SIGN UP
           </button>
+          {showPassNotMatch && (
+            <div className="alert">
+              Your password confirmation is not correct
+            </div>
+          )}
+          {showUserExist && (
+            <div className="alert">User with this email already exists</div>
+          )}
         </form>
       </div>
     </section>

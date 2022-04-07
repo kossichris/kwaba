@@ -72,6 +72,11 @@ button {
   height: 4.4em;
 }
 
+.alert {
+  color: red;
+  text-align: center;
+}
+
 /* Buttons */
 a,
 button {
@@ -191,6 +196,21 @@ form {
   width: 93%;
   margin: 0 auto;
 }
+
+.btn--outline input {
+  width: 0%;
+  height: 12%;
+}
+
+label {
+  position: relative;
+}
+
+label input {
+  position: absolute;
+  opacity: 0;
+}
+
 label {
   color: #626262;
   font-size: 0.9em;
@@ -258,14 +278,16 @@ select {
 
 .user--avatar {
   background: aquamarine;
-  padding: 0.8em;
+  padding: 1em;
   font-size: 5em;
   font-weight: 200;
   border-radius: 16em;
   width: 3em;
   height: 3em;
-  display: block;
+  display: flex;
   margin: 40px auto;
+  justify-content: center;
+  align-items: center;
 }
 
 .user--name {
@@ -291,4 +313,8 @@ Loader spinner*/
   100% {
     transform: rotate(360deg);
   }
+}
+
+fieldset p {
+  color: red;
 }
